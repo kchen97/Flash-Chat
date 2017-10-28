@@ -36,7 +36,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate{
     @IBAction func registerPressed(_ sender: AnyObject) {
         //TODO: Set up a new user on our Firbase database
         if let email = emailTextfield.text, let password = passwordTextfield.text {
-            FIRAuth.auth()?.createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!, completion: { (user, error) in
+            FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 if error != nil {
                     print(error)
                 }
