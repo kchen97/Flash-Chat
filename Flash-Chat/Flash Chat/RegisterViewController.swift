@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class RegisterViewController: UIViewController, UITextFieldDelegate{
 
@@ -34,6 +35,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate{
     }
   
     @IBAction func registerPressed(_ sender: AnyObject) {
+        
+        SVProgressHUD.show()
+        
         //TODO: Set up a new user on our Firbase database
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -42,6 +46,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate{
                 }
                 else {
                     print("Registration successful")
+                    
+                    SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "goToChat", sender: self)
                 }
             })
